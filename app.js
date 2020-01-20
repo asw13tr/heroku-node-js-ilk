@@ -16,7 +16,7 @@ app.use(expressEjsLayouts);
 
 
 app.use('/', require('./routes/main'));
-app.use('/aswpanel', require('./routes/panel'));
+//app.use('/aswpanel', require('./routes/panel'));
 
 
 /*
