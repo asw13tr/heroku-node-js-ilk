@@ -1,0 +1,63 @@
+<div class="clearfix">
+<h4 class="float-left">Hesap Düzenle</h4>
+<a href="/aswpanel/users" class="btn btn-danger btn-sm float-right">Vazgeç</a>
+</div>
+<hr>
+<div class="row justify-content-center">
+    <div class="col-md-5">
+    <div class="card">
+    <form class="form" action="/aswpanel/user/edit/<%=user.id %>" method="post">
+        <div class="card-header bg-primary text-white">Hesap Bilgileri</div>
+        <div class="card-body">
+
+            <div class="form-group">
+                <layout><small><strong>Kullanıcı Adı</strong></small></layout>
+                <input type="text" class="form-control form-control-sm" name="username" disabled value="<%=user.username %>"/>
+            </div>
+
+            <div class="form-group">
+                <layout><small><strong>Şifre</strong> (Değişmeyecekse boş bırak)</small></layout>
+                <input type="password" class="form-control form-control-sm" name="password"/>
+            </div>
+
+            <div class="form-group">
+                <layout><small><strong>E-posta</strong></small></layout>
+                <input type="email" class="form-control form-control-sm" name="email" required value="<%=user.email %>"/>
+            </div>
+
+            <div class="form-group">
+                <layout><small><strong>Ad ve Soyad</strong></small></layout>
+                <input type="text" class="form-control form-control-sm" name="fullname" value="<%=user.fullname %>"/>
+            </div>
+
+            <div class="form-group">
+                <layout><small><strong>Hesap Türü</strong></small></layout>
+                <select class="form-control form-control-sm" name="level">
+                    <option value="1" <%- (user.level==1)? 'selected' : null ; %>>Abone</option>
+                    <option value="2" <%- (user.level==2)? 'selected' : null ; %>>Yetkili</option>
+                    <option value="3" <%- (user.level==3)? 'selected' : null ; %>>Yönetici</option>
+                    <option value="0" <%- (user.level==0)? 'selected' : null ; %>>Aktif Olmayan</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <layout><small><strong>Hesap Durumu</strong></small></layout>
+                <select class="form-control form-control-sm" name="status">
+                    <option value="1" <%- (user.status==1)? 'selected' : null ; %>>Aktif</option>
+                    <option value="0" <%- (user.status==0)? 'selected' : null ; %>>Pasif</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <layout><small><strong>Hakkında</strong></small></layout>
+                <textarea name="description" rows="3" class="form-control form-control-sm"><%=user.description %></textarea>
+            </div>
+
+        </div>
+        <div class="card-footer bg-light clearfix">
+            <button type="submit" class="btn btn-success btn-sm float-right">Güncelle</button>
+        </div>
+    </form>
+    </div>
+    </div>
+</div>

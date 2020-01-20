@@ -1,0 +1,59 @@
+<div class="clearfix">
+<h4 class="float-left">Hesap Listesi</h4>
+<a href="/aswpanel/user/create" class="btn btn-primary btn-sm float-right">Hesap Oluştur</a>
+</div>
+<hr>
+<table class="table table-bordered table-hover table-striped table-sm">
+    <thead>
+        <tr>
+            <th width="30">#</th>
+            <th>Kullanıcı</th>
+            <th>E-posta</th>
+            <th>Durum</th>
+            <th>Seviye</th>
+            <th>Kayıt</th>
+            <th width="70"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% if(users.length<1){ %>
+            <tr><td colspan="7" class="alert alert-danger">Hiç kayıt bulunamadı</td></tr>
+        <% }else{ %>
+            <% users.forEach((item, i) => { %>
+                <tr>
+                    <td><%=item.id %></td>
+                    <td><strong><%=item.username %></strong> <small>(<%=item.fullname %>)</small></td>
+                    <td><%=item.email %></td>
+                    <td><%=item.status %></td>
+                    <td><%=item.level %></td>
+                    <td><%=item.created_at %></td>
+                    <td>
+                        <div class="row p-0 m-0" style="font-size:12px;">
+                            <div class="col-6 p-1 m-0"><a href="/aswpanel/user/edit/<%=item.id%>" class="btn p-0 m-0 btn-sm">📝</a></div>
+                            <div class="col-6 p-1 m-0">
+                            <form class="destroyItem" action="/aswpanel/user/destroy/<%=item.id%>" method="post">
+                                <button type="submit" name="destroy" value="1" class="btn p-0 m-0 btn-sm">❌</button>
+                            </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <% }); %>
+        <% } %>
+
+
+    </tbody>
+</table>
+
+<%- contentFor('scripts') %>
+<script type="text/javascript">
+$(function(){
+    $('form.destroyItem').on('submit', function(e){
+        if(!confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?')){
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+</script>
